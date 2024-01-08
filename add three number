@@ -1,0 +1,9 @@
+class b
+{
+    public static void main(String ars[])
+    {
+            int a,b,c,d;
+            int ans=a+b+c;
+            System.out.println(ans);
+    }
+}
