@@ -1,0 +1,84 @@
+SpringBoot includes SLF4J by default. it stands for Simple Logging Facade for Java.
+
+Various Levels Of Loggings
+==========================
+Logging frameworks provide different levels to categorize log message based on their severity and importance. Common logging levels include[Hirerarchy wise]:
+
+1. Trace:-> The most detailed level . It is used for message that provide deep insights into the flow of program, such as methode calls and variable values. This level is mainly helpful during debugging and diagnosing coplex issues. It is rarely used.
+
+2.Debug:-> Messages at this level contain informations that is useful for debugging process. They typically provide more insights into what is happening within the applications, but without overwhelming the logs with excessive details.
+
+3.Info:-> Informationationals messages the signifiys the applications activites.
+
+4.Warn:-> Warnings indicates potentials issue that could cause problems in the future.
+
+5.Error:-> Messages at this level represents actual errors that have occured in the applications
+
+In ShortWay
+===========
+Trace
+It is used for detailed investigation.
+
+Debug
+It is used for investigation.
+
+Info
+It is used for audit purpose.
+
+Warning
+It is used for recoverable error.
+
+Error
+It is used for non-recoverable error.
+
+
+# Three steps of Logging
+=========================
+1.Logger:->Captures the message
+2.Formatter->Formats the message captaured by the logger
+3.Handler->Dispatches the messages by printing then on the console, or storing them in a file, seding an email, etc.
+
+Example:->
+import org.slf4j.Logger; 
+import org.slf4j.LoggerFactory;
+@RestController
+public class LogController { 
+  
+    // creating a logger 
+    Logger logger 
+        = LoggerFactory.getLogger(LogController.class); 
+  
+    @RequestMapping("/log") public String log() 
+    { 
+        // Logging various log level messages 
+        logger.trace("Log level: TRACE"); 
+        logger.info("Log level: INFO"); 
+        logger.debug("Log level: DEBUG"); 
+        logger.error("Log level: ERROR"); 
+        logger.warn("Log level: WARN"); 
+  
+        return "Hey! You can check the output in the logs"; 
+    } 
+}
+
+//For SpringBoot By default the info is set so we can able to see only info,warn,error but we are not able to see trace and debug to see that we have to set it in the application.properties the command for that will be 
+//For All files in the package means root level
+logging.level.root=TRACE
+If want to do it for a particular file then in the package class then
+logging.level.<package-name>.<class-name>=TRACE
+
+
+#Logging to a file
+===================
+Spring boot only logs to the console by default. In order to log into a file, the following properties need to be added to the application.properties file:
+
+logging.file.path=logs/
+logging.file.name=logs/application.log
+
+#Color-Coded Output
+===================
+If ANSI is supported by your terminal then color-coded log output can be seen in the console. The following property can be set in the application.properties file to get the color-coded output:
+
+spring.output.ansi.enabled=always
+
+
